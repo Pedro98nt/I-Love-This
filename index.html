@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+       
+        <button x-data="{
+            state: 'Unliked',
+            usedKeyboard: false,
+            async updateState(to) {
+                this.state = 'Saving'
+                await new Promise(resolve => setTimeout(resolve, 1000))
+                this.state = to
+            }
+          }"
+          :class="{
+            'like unliked': state === 'Unliked',
+            'like saving': state === 'Saving',
+            'like liked': state === 'Liked',
+            'focus:outline-none': !usedKeyboard
+          }"
+          @click="updateState(state === 'Unliked' ? 'Liked' : 'Unliked')" @keydown.window.tab="usedKeyboard = true">
+            <span class="like-icon like-icon-state" aria-label="state" x-text="state" aria-live="polite">Unliked</span>
+          </button>
+          
+        <script src="" async defer></script>
+    </body>
+</html>
